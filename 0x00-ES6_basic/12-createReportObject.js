@@ -3,9 +3,9 @@ export default function createReportObject(employeesList) {
   return {
     allEmployees: employeesList,
     getNumberOfDepartments: (employeesList) => {
-      let dept = [];
+      const dept = [];
       for (const dep in employeesList) {
-        dept.push(dep)
+        if (dep) dept.push(dep);
       }
       return dept.length;
     },
