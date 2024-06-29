@@ -4,7 +4,6 @@ export default class EVCar extends Car {
   constructor(brand, motor, color, range) {
     super(brand, motor, color);
     this._range = range;
-    this._none = undefined;
   }
 
   get range() {
@@ -19,6 +18,6 @@ export default class EVCar extends Car {
   }
 
   cloneCar() {
-    return new Car(this._none, this._none, this._none);
+    return super.cloneCar();
   }
 }
