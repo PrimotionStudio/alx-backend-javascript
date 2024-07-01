@@ -1,3 +1,4 @@
+/* eslint-disable no-new */
 import Building from './5-building';
 
 const b = new Building(100);
