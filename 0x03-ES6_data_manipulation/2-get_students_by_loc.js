@@ -1,1 +1,3 @@
-#!/usr/bin/node
+export default function getStudentsByLocation(students) {
+  return [];
+}
