@@ -3,12 +3,13 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs').promises;
 
-const path = process.argv.length === 2 ? process.argv[1] : '';
+const path = process.argv.length === 3 ? process.argv[2] : '';
 const app = http.createServer((req, res) => {
   const reqUrl = url.parse(req.url).pathname;
   res.writeHead(200, { 'Content-type': 'text/plain' });
   if (reqUrl === '/') {
     res.write('Hello Holberton School!\n');
+    res.end();
   } else if (reqUrl === '/students') {
     res.write('This is the list of our students\n');
     fs.readFile(path, { encoding: 'utf-8' })
@@ -30,8 +31,9 @@ const app = http.createServer((req, res) => {
         res.write(`Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}\n`);
         res.end();
       })
-      .catch(() => {
+      .catch((err) => {
         res.write('Cannot load the database\n');
+        res.write(`${err}\n`);
         res.end();
       });
   } else {
