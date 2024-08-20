@@ -16,7 +16,7 @@ const app = http.createServer((req, res) => {
       .then((content) => {
         const cs = [];
         const swe = [];
-        const students = content.split('\n');
+        const students = content.split('\n').filter((s) => s.trim());
         students.splice(0, 1);
         students.forEach((student) => {
           const stud = student.split(',');
