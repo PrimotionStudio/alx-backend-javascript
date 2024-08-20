@@ -8,10 +8,10 @@ const app = http.createServer((req, res) => {
   const reqUrl = url.parse(req.url).pathname;
   res.writeHead(200, { 'Content-type': 'text/plain' });
   if (reqUrl === '/') {
-    res.write('Hello Holberton School!\n');
+    res.write('Hello Holberton School!');
     res.end();
   } else if (reqUrl === '/students') {
-    res.write('This is the list of our students\n');
+    res.write('This is the list of our students');
     fs.readFile(path, { encoding: 'utf-8' })
       .then((content) => {
         const cs = [];
@@ -26,14 +26,13 @@ const app = http.createServer((req, res) => {
             swe.push(stud[0]);
           }
         });
-        res.write(`Number of students: ${cs.length + swe.length}\n`);
-        res.write(`Number of students in CS: ${cs.length}. List: ${cs.join(', ')}\n`);
-        res.write(`Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}\n`);
+        res.write(`Number of students: ${cs.length + swe.length}`);
+        res.write(`Number of students in CS: ${cs.length}. List: ${cs.join(', ')}`);
+        res.write(`Number of students in SWE: ${swe.length}. List: ${swe.join(', ')}`);
         res.end();
       })
-      .catch((err) => {
-        res.write('Cannot load the database\n');
-        res.write(`${err}\n`);
+      .catch(() => {
+        res.write('Cannot load the database');
         res.end();
       });
   } else {
