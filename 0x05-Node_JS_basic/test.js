@@ -1,12 +1,24 @@
-process.stdin.setEncoding('utf8');
+const { expect } = require('chai');
+const sinon = require('sinon');
 
-process.stdin.on('readable', () => {
-  const chunk = process.stdin.read();
-  if (chunk !== null) {
-    process.stdout.write(`data: ${chunk}`);
-  }
-});
+const displayMessage = require('./0-console');
 
-process.stdin.on('end', () => {
-  process.stdout.write('end');
+describe('displayMessage', () => {
+  let consoleSpy;
+
+  beforeEach(() => {
+    consoleSpy = sinon.spy(console, 'log');
+  });
+
+  afterEach(() => {
+    consoleSpy.restore();
+  });
+
+  it('logs to the console the right messages', () => {
+    displayMessage('Hello Holberton School!');
+    displayMessage('We are going to learn Node JS today');
+
+    expect(consoleSpy.calledWith('Hello Holberton School!')).to.be.true;
+    expect(consoleSpy.calledWith('We are going to learn Node JS today')).to.be.true;
+  });
 });
